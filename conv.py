@@ -4,7 +4,7 @@ from inr import INFilterBank
 from utils import nearest_neighbours
 
 class ConvNN(nn.Module):
-    def __init__(self, in_channels, out_channels, k, locs_in, locs_out):
+    def __init__(self, in_channels, out_channels, k, locs_in, locs_out, hidden_size=9):
         super(ConvNN, self).__init__()
 
         self.in_channels = in_channels
@@ -13,6 +13,8 @@ class ConvNN(nn.Module):
         self.locs_in = locs_in 
         self.locs_out = locs_out
         self.n_samples = len(locs_out)
+
+        self.hidden_size = hidden_size
 
         # Gets the nearest neighbours relationships
         self.neighbours = nearest_neighbours(locs_in, locs_out, k)
@@ -31,7 +33,7 @@ class ConvNN(nn.Module):
         self.locs_unfold = self.locs_unfold.reshape(shape=(2, -1))
 
         # Construct an implicit neural representation filterbank
-        self.inr_filters = INFilterBank(self.in_channels, self.out_channels)
+        self.inr_filters = INFilterBank(self.in_channels, self.out_channels, hidden_size = self.hidden_size)
 
         # register buffers
         self.register_buffer('_neighbours', torch.tensor(self.neighbours))
