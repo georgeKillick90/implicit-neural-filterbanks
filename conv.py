@@ -3,7 +3,7 @@ import torch.nn as nn
 from inr import INFilterBank
 from utils import nearest_neighbours
 
-class ConvNU(nn.Module):
+class ConvNN(nn.Module):
     def __init__(self, in_channels, out_channels, k, locs_in, locs_out):
         super(ConvNU, self).__init__()
 
