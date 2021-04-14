@@ -5,7 +5,7 @@ from utils import nearest_neighbours
 
 class ConvNN(nn.Module):
     def __init__(self, in_channels, out_channels, k, locs_in, locs_out):
-        super(ConvNU, self).__init__()
+        super(ConvNN, self).__init__()
 
         self.in_channels = in_channels
         self.out_channels = out_channels
