@@ -7,15 +7,15 @@ from pooling import AvgPoolNN, MaxPoolNN
 
 
 class ResBlockNN(nn.Module):
-	def __init__(self, in_channels, out_channels, locs_in, locs_out):
+	def __init__(self, in_channels, out_channels, locs_in, locs_out, hidden_size=9):
 		super(ResBlockNN, self).__init__()
 		self.in_channels = in_channels
 		self.out_channels = out_channels
 		self.locs_in = locs_in
 		self.locs_out = locs_out
 
-		self.conv1 = ConvNN(in_channels, out_channels, 9, self.locs_in, self.locs_out)
-		self.conv2 = ConvNN(out_channels, out_channels, 9, self.locs_out, self.locs_out)
+		self.conv1 = ConvNN(in_channels, out_channels, 9, self.locs_in, self.locs_out, hidden_size=hidden_size)
+		self.conv2 = ConvNN(out_channels, out_channels, 9, self.locs_out, self.locs_out, hidden_size=hidden_size)
 
 		self.bn1 = nn.BatchNorm1d(out_channels)
 		self.bn2 = nn.BatchNorm1d(out_channels)
