@@ -7,6 +7,7 @@
 
 import torch
 import torch.nn as nn
+import numpy as np
 
 class INR(nn.Module):
     def __init__(self, in_features, out_features, hidden_size):
