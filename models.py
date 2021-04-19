@@ -26,6 +26,9 @@ class ResBlockNN(nn.Module):
 		self.expand = None
 		self.pool = None
 
+		if locs_in.shape[0] == locs_out.shape:
+			pool = AvgPoolNN(locs_in, locs_out, k=4)
+
 
 		if in_channels != out_channels:
 			self.pool = AvgPoolNN(locs_in, locs_out, k=4)
@@ -42,8 +45,11 @@ class ResBlockNN(nn.Module):
 		out = self.conv2(out)
 		out = self.bn2(out)
 
+		if self.pool != None:
+			x = self.pool(x)
+
 		if self.expand != None:
-			identity = self.bn3(self.expand(self.pool(x)))
+			identity = self.bn3(self.expand(x))
 
 		out += identity
 		out = self.activation(out)
