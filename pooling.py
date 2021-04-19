@@ -28,7 +28,7 @@ class MaxPoolNN(nn.Module):
 
 class AvgPoolNN(nn.Module):
     def __init__(self, locs_in, locs_out, k):
-        super(MaxPoolNN, self).__init__()
+        super(AvgPoolNN, self).__init__()
 
         # I am thinking that the way locs are passed are important, copy might be necessary
         self.locs_in = locs_in
