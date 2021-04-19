@@ -24,8 +24,11 @@ class ResBlockNN(nn.Module):
 		self.activation = nn.ReLU(inplace=True)
 
 		self.expand = None
+		self.pool = None
+
 
 		if in_channels != out_channels:
+			self.pool = AvgPoolNN(locs_in, locs_out, k=4)
 			self.expand = nn.Conv1d(in_channels, out_channels, 1)
 			self.bn3 = nn.BatchNorm1d(out_channels)
 
@@ -40,7 +43,7 @@ class ResBlockNN(nn.Module):
 		out = self.bn2(out)
 
 		if self.expand != None:
-			identity = self.bn3(self.expand(x))
+			identity = self.bn3(self.expand(self.pool(x)))
 
 		out += identity
 		out = self.activation(out)
