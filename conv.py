@@ -37,7 +37,7 @@ class ConvNN(nn.Module):
 
         # register buffers
         self.register_buffer('_neighbours', torch.tensor(self.neighbours))
-        self.register_buffer('_locs_unfold', torch.tensor(self.locs_unfold).float())
+        self.register_buffer('_locs_unfold', torch.tensor(self.locs_unfold.clone().detach()).float())
 
         # register parameter so sent to device
         self.register_parameter('bias', nn.Parameter(torch.zeros(out_channels).unsqueeze(0).unsqueeze(-1))) 
