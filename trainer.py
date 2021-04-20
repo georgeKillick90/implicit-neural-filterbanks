@@ -3,7 +3,7 @@ import torch.nn as nn
 import numpy as np
 from sklearn.metrics import accuracy_score
 
-def trainer(net, train_loader, valid_loader, optimizer, validation=True):
+def trainer(net, train_loader, valid_loader, optimizer, validation=True, device=device):
     print("Start Training")
 
 
