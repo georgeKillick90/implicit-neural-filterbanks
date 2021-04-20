@@ -3,8 +3,12 @@ import torch.nn as nn
 import numpy as np
 from sklearn.metrics import accuracy_score
 
-def trainer(net, train_loader, valid_loader, validation=True):
+def trainer(net, train_loader, valid_loader, optimizer, validation=True):
     print("Start Training")
+
+
+    criterion = nn.CrossEntropyLoss()
+    criterion.to(device)
 
     for epoch in range(30):  # loop over the dataset multiple times
 
